@@ -1,5 +1,8 @@
 name: Deploy Website
-on: [push]
+on:
+  push:
+    branches: [ main ]  # Explicitly target main branch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
