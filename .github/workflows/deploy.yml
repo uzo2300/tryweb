@@ -1,11 +1,20 @@
 name: Deploy Website
-on: [push]
+on:
+  push:
+    branches: [ main ]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: peaceiris/actions-gh-pages@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fixes git errors
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
+          force_orphan: true  # Ensures clean deploy
